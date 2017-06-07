@@ -107,13 +107,15 @@ def analyze_friend_bans(steam_id)
 
   bans.map! do |b|
     if details[b[:id]]
-      bans[:detail] = details[b[:id]]
+      b[:detail] = details[b[:id]]
     end
+
+    b
   end
 
   if $order == :asc
     bans.sort! {|b1, b2| b1[:days] <=> b2[:days]}
-  elsif order == :desc
+  elsif $order == :desc
     bans.sort! {|b1, b2| b2[:days] <=> b1[:days]}
   end
 
